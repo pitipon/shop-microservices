@@ -7,11 +7,11 @@ import (
 	"os"
 
 	"github.com/pitipon/shop-microservices/config"
+	"github.com/pitipon/shop-microservices/pkg/database"
 )
 
 func main() {
 	ctx := context.Background()
-	_ = ctx
 
 	// Initialize config
 	cfg := config.LoadConfig(func() string {
@@ -22,5 +22,9 @@ func main() {
 		return os.Args[1]
 	}())
 
-	log.Println(cfg)
+	// Database connection
+	db := database.DbConn(ctx, &cfg)
+	defer db.Disconnect(ctx)
+
+	log.Println(db)
 }
