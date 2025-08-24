@@ -8,6 +8,7 @@ import (
 
 	"github.com/pitipon/shop-microservices/config"
 	"github.com/pitipon/shop-microservices/pkg/database"
+	"github.com/pitipon/shop-microservices/server"
 )
 
 func main() {
@@ -26,5 +27,5 @@ func main() {
 	db := database.DbConn(ctx, &cfg)
 	defer db.Disconnect(ctx)
 
-	log.Println(db)
+	server.Start(ctx, &cfg, db)
 }
