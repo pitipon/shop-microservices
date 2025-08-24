@@ -83,10 +83,15 @@ func Start(pctx context.Context, cfg *config.Config, db *mongo.Client) {
 	// Custom start for microservice server
 	switch s.cfg.App.Name {
 	case "auth":
+		s.authService()
 	case "player":
+		s.playerService()
 	case "item":
+		s.itemService()
 	case "inventory":
+		s.inventoryService()
 	case "payment":
+		s.paymentService()
 	}
 
 	// Graceful shutdown
