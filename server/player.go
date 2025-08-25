@@ -17,8 +17,8 @@ func (s *server) playerService() {
 	_ = grpcHandler
 	_ = queueHandler
 
-	player := s.app.Group("/player_v1")
+	player := s.app.Group("/player/v1")
 
 	// Health check
-	player.GET("health", s.healthCheckService)
+	player.GET("", s.healthCheckService)
 }

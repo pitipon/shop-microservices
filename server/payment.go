@@ -17,9 +17,9 @@ func (s *server) paymentService() {
 	_ = gprcHandler
 	_ = queueHandler
 
-	payment := s.app.Group("/payment_v1")
+	payment := s.app.Group("/payment/v1")
 
 	// Health Check
-	payment.GET("/health", s.healthCheckService)
+	payment.GET("", s.healthCheckService)
 
 }
