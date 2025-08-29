@@ -6,7 +6,7 @@ type (
 		Limit int    `query:"limit" validate:"required,min=2,max=10"`
 	}
 
-	PaginationRes struct {
+	PaginateRes struct {
 		Data  any           `json:"data"`
 		Limit int           `json:"limit"`
 		Total int64         `json:"total"`
