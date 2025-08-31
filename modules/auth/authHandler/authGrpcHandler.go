@@ -1,9 +1,15 @@
 package authHandler
 
-import "github.com/pitipon/shop-microservices/modules/auth/authUsecase"
+import (
+	"context"
+
+	authPb "github.com/pitipon/shop-microservices/modules/auth/authPb"
+	"github.com/pitipon/shop-microservices/modules/auth/authUsecase"
+)
 
 type (
 	authGprcHandler struct {
+		authPb.UnimplementedAuthGrpcServiceServer
 		authUsecase authUsecase.AuthUsercaseService
 	}
 )
@@ -12,4 +18,12 @@ func NewAuthGrpcHandler(authUsecase authUsecase.AuthUsercaseService) *authGprcHa
 	return &authGprcHandler{
 		authUsecase: authUsecase,
 	}
+}
+
+func (g *authGprcHandler) CredentialSearch(ctx context.Context, req *authPb.CredentialSearchReq) (*authPb.CredentialSearchRes, error) {
+	return nil, nil
+}
+
+func (g *authGprcHandler) RolesCount(ctx context.Context, req *authPb.RolesCountReq) (*authPb.RolesCountRes, error) {
+	return nil, nil
 }
