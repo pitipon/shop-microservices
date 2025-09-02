@@ -6,11 +6,11 @@ option go_package = "github.com/pitipon/shop-microservices";
 
 // structure
 
-message CredentialSearchReq {
+message AccessTokenSearchReq {
     string accessToken = 1;
 }
 
-message CredentialSearchRes {
+message AccessTokenSearchRes {
     bool isValid = 1;
 }
 
@@ -22,7 +22,7 @@ message RolesCountRes {
 
 // Methods
 service AuthGrpcService {
-    rpc CredentialSearch(CredentialSearchReq) returns (CredentialSearchRes);
+    rpc CredentialSearch(AccessTokenSearchReq) returns (AccessTokenSearchRes);
     rpc RolesCount(RolesCountReq) returns (RolesCountRes);
 }
 
