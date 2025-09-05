@@ -14,7 +14,7 @@ import (
 func (s *server) playerService() {
 	repo := playerRepository.NewPlayerRepository(s.db)
 	usecase := playerUsecase.NewPlayerUsecase(repo)
-	handler := playerHandler.NewPlayerHandler(s.cfg, usecase)
+	httpHandler := playerHandler.NewPlayerHandler(s.cfg, usecase)
 	grpcHandler := playerHandler.NewPlayerGrpcHandler(usecase)
 	queueHandler := playerHandler.NewPlayerQueueHandler(usecase)
 
@@ -28,7 +28,6 @@ func (s *server) playerService() {
 		grpcServer.Serve(lis)
 	}()
 
-	_ = handler
 	_ = grpcHandler
 	_ = queueHandler
 
@@ -36,4 +35,6 @@ func (s *server) playerService() {
 
 	// Health check
 	player.GET("", s.healthCheckService)
+
+	player.POST("/player/register", httpHandler.CreatePlayer)
 }

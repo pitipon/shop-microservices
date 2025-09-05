@@ -1,21 +1,17 @@
 package server
 
 import (
+	"github.com/pitipon/shop-microservices/modules/payment/paymentHandler"
 	"github.com/pitipon/shop-microservices/modules/payment/paymentRepository"
-	"github.com/pitipon/shop-microservices/modules/player/playerHandler"
-	"github.com/pitipon/shop-microservices/modules/player/playerUsecase"
+	"github.com/pitipon/shop-microservices/modules/payment/paymentUsecase"
 )
 
 func (s *server) paymentService() {
 	repo := paymentRepository.NewPaymentRepository(s.db)
-	usecase := playerUsecase.NewPlayerUsecase(repo)
-	handler := playerHandler.NewPlayerHandler(s.cfg, usecase)
-	gprcHandler := playerHandler.NewPlayerGrpcHandler(usecase)
-	queueHandler := playerHandler.NewPlayerQueueHandler(usecase)
+	usecase := paymentUsecase.NewPaymentUsecase(repo)
+	handler := paymentHandler.NewPaymentHttpHandler(s.cfg, usecase)
 
 	_ = handler
-	_ = gprcHandler
-	_ = queueHandler
 
 	payment := s.app.Group("/payment/v1")
 
